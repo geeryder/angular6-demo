@@ -1,0 +1,144 @@
+<form 
+#contactForm="ngForm"
+(ngSubmit)="submit(contactForm.value)"
+
+class="p-5 w-70 ">
+  <div class="form-group">
+      <label for="exampleFormControlInput1">Name</label>
+      <input 
+      name="name"
+      id="name"
+      required
+      minlength="3"
+      #fullName="ngModel"
+      ngModel
+      (input)="log(fullName.value)"
+
+
+      type="text" 
+      class="form-control" 
+      
+       placeholder="Enter name">
+      <div *ngIf="fullName.invalid && fullName.touched">
+        <small *ngIf="fullName.errors.required"class="text-danger">Name is required</small>
+        <small *ngIf="fullName.errors.minlength"class=" col-1 text-danger">Must be at least 3 characters</small>
+      </div>
+  
+  </div>
+
+  <div>
+      <label for="exampleFormControlInput1">Email address</label>
+      <input 
+      required
+      #email="ngModel"
+      name = "email"
+      ngModel
+      email
+
+      type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      <div *ngIf="email.invalid && email.touched">
+        <small *ngIf="email.errors.required" class="text-danger">Emai is required</small>
+        <small *ngIf="email.errors.email" class=" col-md-6 text-danger">Email must be valid</small>
+      </div>
+      <p> Errors: {{email.errors | json}}</p>
+ 
+    </div>
+  <div class="form-group">
+      <label for="exampleFormControlTextarea1">A message</label>
+      <textarea 
+      required
+      #message="ngModel"
+      name = "message"
+      ngModel
+
+      class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <small *ngIf="message.invalid && message.touched" class="text-danger">Message is required</small>
+ 
+    </div>
+    <div class="form-check form-check-inline">
+        <input 
+        required
+        #subcribe="ngModel"
+        name = "subcribe"
+        ngModel
+
+        class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        <label class="form-check-label" for="inlineCheckbox1">Subcribe to mailing List</label>
+        
+      </div>
+      <small *ngIf="subcribe.invalid && subcribe.touched" class="text-danger">Required</small>
+
+      
+      <div class="form-check">
+          <label class="row" for="exampleFormControlSelect1">How did you hear about us?</label>
+        
+          <input 
+          required
+          #checkbox="ngModel"
+          name = "checkbox"
+          ngModel
+
+          class="form-check-input" type="radio"  id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Email
+          </label>
+        </div>
+        <div class="form-check">
+          <input 
+          required
+          #chekbox="ngModel"
+          name = "checkbox"
+          ngModel
+          class="form-check-input" type="radio"  id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            Flying Peach
+          </label>
+        </div>
+        <div class="form-check">
+            <input 
+            required
+            #chekbox="ngModel"
+            name = "checkbox"
+            ngModel
+            class="form-check-input" type="radio"  value="option3">
+            <label class="form-check-label" for="exampleRadios3">
+              Giant Caterpillar
+            </label>
+            <small *ngIf="checkbox.invalid && checkbox.touched" class="text-danger">Message is required</small>
+          </div>
+
+  <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input 
+      required
+      minlength="6"
+      #password="ngModel"
+      name = "password"
+      ngModel
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+      type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <div *ngIf= "password.invalid && password.touched ">
+        <small *ngIf="password.errors.minlength" class="text-danger">Password must be at least 6 chararcters</small>
+        <small *ngIf="password.errors.pattern" class="text-danger">Password must contain a combination of uppcase and lowercase letters</small>
+      </div>
+
+ 
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Confirm assword</label>
+        <input
+        required
+        minlength="6"
+        ngModel
+        #confirmPassword="ngModel"
+          name = "confirmPassword"
+     
+         type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
+        <small *ngIf="confirmPassword.touched && (confirmPassword.value != password.value)" class="text-danger">Password doesn't match</small>
+      </div>
+      <p> {{contactForm.valid | json}}</p>
+  <button [disabled]="contactForm.invalid || (confirmPassword.value != password.value)" type="button" class="btn btn-secondary">Lets go </button>
+      
+
+  
+</form>

@@ -1,0 +1,15 @@
+<app-nav></app-nav>
+<app-jumbotron></app-jumbotron><div class="card-deck">
+  
+  
+</div>
+<div class="card col" *ngFor ="let card of cards">
+  <app-card title = "{{card.title}}" content = "{{card.content}}"></app-card>
+  
+  
+</div>
+<router-outlet></router-outlet>
+
+
+
+<app-form></app-form>
